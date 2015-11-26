@@ -1,0 +1,5 @@
+C:\Users\Malabar\Documents\Visual Studio 2015\Projects\Csharptp\Tek3.tp1\bin\Debug\Tek3.tp1.pdb
+C:\Users\Malabar\Documents\Visual Studio 2015\Projects\Csharptp\Tek3.tp1\obj\x86\Debug\Tek3.tp1.csprojResolveAssemblyReference.cache
+C:\Users\Malabar\Documents\Visual Studio 2015\Projects\Csharptp\Tek3.tp1\obj\x86\Debug\Tek3.tp1.pdb
+C:\Users\Malabar\Documents\Visual Studio 2015\Projects\Csharptp\Tek3.tp1\bin\Debug\Tek3.tp1.dll
+C:\Users\Malabar\Documents\Visual Studio 2015\Projects\Csharptp\Tek3.tp1\obj\x86\Debug\Tek3.tp1.dll

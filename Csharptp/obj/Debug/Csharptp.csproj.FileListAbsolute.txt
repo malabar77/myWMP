@@ -7,3 +7,6 @@ C:\Users\Malabar\Documents\Visual Studio 2015\Projects\Csharptp\Csharptp\obj\Deb
 C:\Users\Malabar\Documents\GitHub\myWMP\Csharptp\bin\Debug\Csharptp.exe.config
 C:\Users\Malabar\Documents\GitHub\myWMP\Csharptp\obj\Debug\Csharptp.exe
 C:\Users\Malabar\Documents\GitHub\myWMP\Csharptp\obj\Debug\Csharptp.pdb
+C:\Users\Malabar\Documents\GitHub\myWMP\Csharptp\bin\Debug\Csharptp.exe
+C:\Users\Malabar\Documents\GitHub\myWMP\Csharptp\bin\Debug\Csharptp.pdb
+C:\Users\Malabar\Documents\GitHub\myWMP\Csharptp\obj\Debug\Csharptp.csprojResolveAssemblyReference.cache

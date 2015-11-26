@@ -11,13 +11,11 @@ namespace Csharptp
         private bool isInit = false;
         public virtual void Init() {
             isInit = true;
-            Console.Write("Coucou");
             Console.ReadLine();
         }
         public bool Work() {
             if (isInit == false)
                 return false;
-            Console.Write("Coucou");
             Console.ReadLine();
             return true;
                 }
@@ -26,7 +24,6 @@ namespace Csharptp
             if (isInit == false)
                 return;
             Console.ReadLine();
-            Console.Write("Coucou");
         }
     }
 }

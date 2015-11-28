@@ -7,8 +7,20 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <Button Content="Start" Click="StartUsine" VerticalAlignment="Top" Height="42" Margin="10,23,393,0" ></Button>
-        <Button Content="Stop" Click="StopUsine" VerticalAlignment="Top" Height="42" Margin="10,81,393,0" ></Button>
-        <TextBlock Name="UsineStatus" Margin="147,23,204,196"></TextBlock>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="69*"/>
+            <ColumnDefinition Width="448*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <Button Content="Start" Click="StartUsine" VerticalAlignment="Top" HorizontalAlignment="Left" Height="42" Width="100" Margin="10,23,0,0" Grid.ColumnSpan="2" ></Button>
+        <Button Content="Stop" Click="StopUsine" VerticalAlignment="Top" HorizontalAlignment="Left" Height="42" Width="100" Margin="10,81,0,0" Grid.ColumnSpan="2" ></Button>
+        <TextBlock Name="UsineStatus" Margin="78.042,23,204,109" Grid.Column="1"></TextBlock>
+        <TextBlock Margin="124.042,0,0,25" Height="18" VerticalAlignment="Bottom" Text="Timer Delay" HorizontalAlignment="Left" Width="166" Grid.Column="1"></TextBlock>
+        <ListBox Name="LstDroids" Margin="0,142,0,0" Grid.RowSpan="2" HorizontalAlignment="Left" Width="188" Height="100" VerticalAlignment="Top" Grid.ColumnSpan="2"></ListBox>
+        <Slider LargeChange="10" Margin="0,30,10,0" Maximum="10" Minimum="1" Name="slider1" TickPlacement="TopLeft" Ticks="1, 2, 3, 4, 5, 6, 7, 8, 9" Value="1" ValueChanged="Slider_ValueChanged" Height="36" VerticalAlignment="Top" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <TextBlock Name ="Timertext" Margin="124.042,0,0,0" Height="18" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="38" Grid.Column="1" Text="{Binding ElementName=slider1,Path=Value}"></TextBlock>
     </Grid>
 </Window>

@@ -46,12 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="C3PO.cs" />
     <Compile Include="Droid.cs" />
     <Compile Include="DroidCreatedArg.cs" />
     <Compile Include="DroidFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="R2D2.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

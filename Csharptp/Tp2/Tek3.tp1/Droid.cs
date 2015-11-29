@@ -19,6 +19,7 @@ namespace Tek3.tp1
     public abstract class Droid
     {
         private bool isInit = false;
+        public string Name = "Droid";
 
         public virtual void Init()
         {
@@ -41,6 +42,51 @@ namespace Tek3.tp1
                 throw new MethodAccessException("le droid n'est pas initialisé!");
 
             Console.WriteLine("Droid shutdown");
+        }
+        public bool isinit()
+        {
+            return isInit;
+        }
+    }
+
+
+    public class C3PO : Droid
+    {
+        public override void Init()
+        {
+            Console.WriteLine("C3PO Init");
+            Name = "C3P0";
+            base.Init();
+        }
+    }
+
+    public class R2D2 : Droid
+    {
+        public override void Init()
+        {
+            Console.WriteLine("R2D2 Init");
+            Name = "R2D2";
+            base.Init();
+        }
+    }
+
+    public class AstroMech : Droid
+    {
+        public override void Init()
+        {
+            Console.WriteLine("AstroMech Init");
+            Name = "AstroMech";
+            base.Init();
+        }
+    }
+
+    public class BattleDroid : Droid
+    {
+        public override void Init()
+        {
+            Console.WriteLine("BattleDroid Init");
+            Name = "BattleDroid";
+            base.Init();
         }
     }
 }

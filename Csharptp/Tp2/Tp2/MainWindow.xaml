@@ -5,22 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tp2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="398" Width="627">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="69*"/>
-            <ColumnDefinition Width="448*"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="8*"/>
-            <RowDefinition Height="3*"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
-        <Button Content="Start" Click="StartUsine" VerticalAlignment="Top" HorizontalAlignment="Left" Height="42" Width="100" Margin="10,23,0,0" Grid.ColumnSpan="2" ></Button>
-        <Button Content="Stop" Click="StopUsine" VerticalAlignment="Top" HorizontalAlignment="Left" Height="42" Width="100" Margin="10,81,0,0" Grid.ColumnSpan="2" ></Button>
-        <TextBlock Name="UsineStatus" Margin="78.042,23,204,109" Grid.Column="1"></TextBlock>
-        <TextBlock Margin="124.042,0,0,25" Height="18" VerticalAlignment="Bottom" Text="Timer Delay" HorizontalAlignment="Left" Width="166" Grid.Column="1"></TextBlock>
-        <ListBox Name="LstDroids" Margin="0,142,0,0" Grid.RowSpan="2" HorizontalAlignment="Left" Width="188" Height="100" VerticalAlignment="Top" Grid.ColumnSpan="2"></ListBox>
-        <Slider LargeChange="10" Margin="0,30,10,0" Maximum="10" Minimum="1" Name="slider1" TickPlacement="TopLeft" Ticks="1, 2, 3, 4, 5, 6, 7, 8, 9" Value="1" ValueChanged="Slider_ValueChanged" Height="36" VerticalAlignment="Top" Grid.Row="1" Grid.ColumnSpan="2"/>
-        <TextBlock Name ="Timertext" Margin="124.042,0,0,0" Height="18" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="38" Grid.Column="1" Text="{Binding ElementName=slider1,Path=Value}"></TextBlock>
+        <Button Content="Start" Click="StartUsine" VerticalAlignment="Top" Height="42" Margin="10,23,-35.6,0" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" HorizontalAlignment="Left" Width="120" />
+        <Button Content="Stop" Click="StopUsine" Margin="10,81,0,0" Height="42" VerticalAlignment="Top" HorizontalAlignment="Left" Width="120" d:LayoutOverrides="TopMargin, BottomMargin" />
+        <TextBlock x:Name="UsineStatus" Margin="10,142,0,0" HorizontalAlignment="Left" Width="62" Height="100" VerticalAlignment="Top"/>
+        <TextBlock Margin="21.4,0,0,37.95" Height="18" VerticalAlignment="Bottom" Text="Timer Delay" HorizontalAlignment="Left" Width="240"/>
+        <ListBox x:Name="LstDroids" Margin="146,10,10,48"/>
+        <TextBlock x:Name ="Timertext" Margin="106.4,0,272.6,37.95" Height="18" VerticalAlignment="Bottom" Text="{Binding Value, ElementName=slider1}"/>
+        <Slider LargeChange="10" Margin="21.4,0,10,13" Maximum="10" Minimum="1" x:Name="slider1" TickPlacement="TopLeft" Ticks="1, 2, 3, 4, 5, 6, 7, 8, 9" Value="1" ValueChanged="Slider_ValueChanged" Height="30" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>

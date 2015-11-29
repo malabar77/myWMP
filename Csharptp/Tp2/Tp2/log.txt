@@ -1,3 +1,39 @@
-Creation d'un Droid
+Creation d'un Droid n°= 1
+C'est un Droid de type R2D2
+Le Droid est initialisé
+Creation d'un Droid n°= 2
+C'est un Droid de type AstroMech
+Le Droid est initialisé
+Creation d'un Droid n°= 3
+C'est un Droid de type R2D2
+Le Droid est initialisé
+Creation d'un Droid n°= 4
+C'est un Droid de type AstroMech
+Le Droid est initialisé
+Creation d'un Droid n°= 5
 C'est un Droid de type BattleDroid
+Le Droid est initialisé
+Creation d'un Droid n°= 6
+C'est un Droid de type AstroMech
+Le Droid est initialisé
+Creation d'un Droid n°= 7
+C'est un Droid de type R2D2
+Le Droid est initialisé
+Creation d'un Droid n°= 8
+C'est un Droid de type AstroMech
+Le Droid est initialisé
+Creation d'un Droid n°= 9
+C'est un Droid de type AstroMech
+Le Droid est initialisé
+Creation d'un Droid n°= 10
+C'est un Droid de type C3P0
+Le Droid est initialisé
+Creation d'un Droid n°= 11
+C'est un Droid de type BattleDroid
+Le Droid est initialisé
+Creation d'un Droid n°= 12
+C'est un Droid de type BattleDroid
+Le Droid est initialisé
+Creation d'un Droid n°= 13
+C'est un Droid de type AstroMech
 Le Droid est initialisé

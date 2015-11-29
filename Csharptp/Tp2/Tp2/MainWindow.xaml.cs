@@ -5,12 +5,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.IO;
 using Tek3.tp1;
+using System.Text;
 
 namespace Tp2
 {
     public partial class MainWindow : Window
     {
         private double TimerDelay;
+        private int num = 0;
         public ObservableCollection<Droid> Droids { get; set; }
 
         private DroidFactory usine = new DroidFactory(new List<Type>() {
@@ -38,7 +40,8 @@ namespace Tp2
         {
             this.Dispatcher.BeginInvoke(new Action(() =>
             {
-                Writeinlog(e.Droid.Name, e.Droid.isinit());
+                num += 1;
+                Writeinlog(e.Droid.Name, e.Droid.isinit(), num);
                 this.Droids.Add(e.Droid);
             }));
         }
@@ -47,27 +50,36 @@ namespace Tp2
         {
             usine.Start(this.TimerDelay);
             UsineStatus.Text = "On";
+            string[] lines = { };
+            File.WriteAllLines(@"../../log.txt", lines);
         }
 
         private void StopUsine(object sender, RoutedEventArgs e)
         {
             usine.Stop();
             UsineStatus.Text = "Off";
+            num = 0;
         }
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             TimerDelay = slider1.Value;
         }
-    
-        public void Writeinlog(string name, bool init)
+
+        public static async void Writeinlog(string name, bool init, int num)
         {
             string sline = "Le Droid n'est pas initialisé";
-            UsineStatus.Text = name;
+            string empty = string.Empty;
             if (init == true)
                 sline = "Le Droid est initialisé";
-            string[] lines = { "Creation d'un Droid", "C'est un Droid de type " + name, sline };
-            System.IO.File.WriteAllLines(@"../../log.txt", lines);
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Creation d'un Droid n°= " + num);
+            sb.AppendLine("C'est un Droid de type " + name);
+            sb.AppendLine(sline);
+            using (StreamWriter outfile = new StreamWriter(@"../../log.txt", true))
+            {
+                await outfile.WriteAsync(sb.ToString());
+            }
         }
     }
 }

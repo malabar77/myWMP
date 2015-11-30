@@ -8,9 +8,9 @@
         Title="MainWindow" Height="350" Width="525">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="21*"/>
-            <RowDefinition Height="254*"/>
-            <RowDefinition Height="44*"/>
+            <RowDefinition Height="21"/>
+            <RowDefinition/>
+            <RowDefinition Height="44"/>
         </Grid.RowDefinitions>
         <Menu x:Name="menu">
             <MenuItem Header="Menu" Height="21" Width="69.507">
@@ -20,10 +20,10 @@
                 <MenuItem Header="Parcourir" Name="Parcourir" Click="Parcourir_Click" />
             </MenuItem>
         </Menu>
-        <Slider x:Name="trackwave" Margin="0,13,0,-3" Grid.Row="2" ValueChanged="slider_ValueChanged" HorizontalAlignment="Right" Width="90"/>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="25,13,0,18" Grid.Row="2" TextWrapping="Wrap" Text="--:--" Width="58"/>
-        <Image x:Name="image" Grid.Row="1"/>
-        <ProgressBar Margin="63,10,164,16" Grid.Row="2"/>
-       
+        <Slider x:Name="trackwave" Margin="0,0,0,-3" Grid.Row="2" ValueChanged="slider_ValueChanged" HorizontalAlignment="Right" Width="90" Height="34" VerticalAlignment="Bottom"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="25,0,0,18" Grid.Row="2" TextWrapping="Wrap" Text="--:--" Width="58" Height="13" VerticalAlignment="Bottom"/>
+        <Image x:Name="image" Grid.Row="1" Margin="100,0,0,0"/>
+        <ProgressBar Margin="63,0,164,16" Grid.Row="2" Height="18" VerticalAlignment="Bottom"/>
+
     </Grid>
 </Window>

@@ -21,9 +21,10 @@
             </MenuItem>
         </Menu>
         <Slider x:Name="trackwave" Margin="0,0,0,-3" Grid.Row="2" ValueChanged="slider_ValueChanged" HorizontalAlignment="Right" Width="90" Height="34" VerticalAlignment="Bottom"/>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="25,0,0,18" Grid.Row="2" TextWrapping="Wrap" Text="--:--" Width="58" Height="13" VerticalAlignment="Bottom"/>
+        <TextBlock x:Name="Timer" HorizontalAlignment="Left" Margin="25,0,0,18" Grid.Row="2" TextWrapping="Wrap" Text="--:--" Width="58" Height="13" VerticalAlignment="Bottom"/>
         <Image x:Name="image" Grid.Row="1" Margin="100,0,0,0"/>
         <ProgressBar Margin="63,0,164,16" Grid.Row="2" Height="18" VerticalAlignment="Bottom"/>
+        <TextBlock x:Name="Playlistview" HorizontalAlignment="Left" Grid.Row="1" TextWrapping="Wrap" Text="" Width="507" Margin="0,5,0,0"/>
 
     </Grid>
 </Window>

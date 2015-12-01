@@ -21,6 +21,7 @@ using System.Collections;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 
 namespace WMP
 {
@@ -31,6 +32,9 @@ namespace WMP
     {
         private Audio music;
         private SoundPlayer player;
+        private bool onAir = false;
+        private int bitrate;
+        private int duration;
 
         public MainWindow()
         {
@@ -39,14 +43,46 @@ namespace WMP
 
         private void Lecture_Click(object sender, RoutedEventArgs e)
         {
-            //System.Media.SoundPlayer player = new SoundPlayer();
-            //player.SoundLocation = "..\\..\\LARCY.wav";
-            //player.LoadAsync();
-            //player.PlayLooping();
+            player = new SoundPlayer();
+            player.SoundLocation = "..\\..\\LARCY.wav";
+            player.Load();
+            player.PlayLooping();
+            onAir = true;
+            this.Title = "Onair";
+            SetDuration(GetDuration("..\\..\\LARCY.wav"));
+
             //Thread.Sleep(5000);
             //player.Stop();
-            music = new Audio("..\\..\\Birdy.mp3");
-            music.Play();
+            //music = new Audio("..\\..\\Birdy.mp3");
+            //music.Play();
+        }
+
+        private int GetDuration(string path)
+        {
+            byte[] TotalBytes = File.ReadAllBytes("..\\..\\LARCY.wav");
+            bitrate = (BitConverter.ToInt32(new[] { TotalBytes[28], TotalBytes[29], TotalBytes[30], TotalBytes[31] }, 0) * 8);
+            duration = (TotalBytes.Length - 8) * 8 / bitrate;
+            return duration;
+        }
+
+        private void SetDuration(int duration)
+        {
+            int n = 1;
+            int minutes = 0;
+            int seconds = 0;
+            string min;
+            string sec;
+            while (n * 60 < duration)
+                n = n + 1;
+            minutes = n - 1;
+            seconds = duration % 60;
+            min = minutes.ToString();
+            sec = seconds.ToString();
+            if (minutes < 10)
+                min = "0" + minutes.ToString();
+            if (seconds < 10)
+                sec = "0" + seconds.ToString();
+            Timer.Text = min + ":" + sec;
         }
 
         private void Pause_Click(object sender, RoutedEventArgs e)
@@ -61,12 +97,23 @@ namespace WMP
 
         private void Parcourir_Click(object sender, RoutedEventArgs e)
         {
-            
+            OpenFileDialog fenetre = new OpenFileDialog();
+            fenetre.Filter = "Fichiers Audio|*.wav;*.mp3";
+            fenetre.Multiselect = false;
+            if (fenetre.ShowDialog() == true)
+            {
+                Playlistview.Text = fenetre.SafeFileName;
+                this.Title = fenetre.SafeFileName;
+                player = new SoundPlayer();
+                player.SoundLocation = fenetre.FileName;
+                player.LoadAsync();
+                player.PlayLooping();
+            }
         }
 
         private void slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
 
-	}
+	    }
     }
 }

@@ -92,7 +92,7 @@ namespace WMP
 
         private void Pause_Click(object sender, RoutedEventArgs e)
         {
-            Pause = true;
+            mediaPlayer.Pause();
         }
 
         private void Stop_Click(object sender, RoutedEventArgs e)

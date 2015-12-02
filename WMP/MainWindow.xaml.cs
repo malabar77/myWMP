@@ -22,6 +22,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using MP = MediaPlayer;
 
 namespace WMP
 {
@@ -35,6 +36,9 @@ namespace WMP
         private bool onAir = false;
         private int bitrate;
         private int duration;
+        private MP.MediaPlayer mediaPlayer;
+        private string mp3 = "Birdy.mp3";
+        private string wav = "..\\..\\LARCY.wav";
 
         public MainWindow()
         {
@@ -43,13 +47,14 @@ namespace WMP
 
         private void Lecture_Click(object sender, RoutedEventArgs e)
         {
-            player = new SoundPlayer();
-            player.SoundLocation = "..\\..\\LARCY.wav";
-            player.Load();
-            player.PlayLooping();
+            mediaPlayer = new MP.MediaPlayer();
+            mediaPlayer.Open(mp3);
+            //player = new SoundPlayer();
+            //player.SoundLocation = "..\\..\\LARCY.wav";
+            //player.Load();
+            //player.PlayLooping();
             onAir = true;
-            this.Title = "Onair";
-            SetDuration(GetDuration("..\\..\\LARCY.wav"));
+            SetDuration(GetDuration(mp3));
 
             //Thread.Sleep(5000);
             //player.Stop();
@@ -87,12 +92,12 @@ namespace WMP
 
         private void Pause_Click(object sender, RoutedEventArgs e)
         {
-
+            Pause = true;
         }
 
         private void Stop_Click(object sender, RoutedEventArgs e)
         {
-
+            mediaPlayer.Stop();
         }
 
         private void Parcourir_Click(object sender, RoutedEventArgs e)
@@ -102,12 +107,21 @@ namespace WMP
             fenetre.Multiselect = false;
             if (fenetre.ShowDialog() == true)
             {
-                Playlistview.Text = fenetre.SafeFileName;
+                Playlistview.Text = fenetre.FileName;
                 this.Title = fenetre.SafeFileName;
-                player = new SoundPlayer();
-                player.SoundLocation = fenetre.FileName;
-                player.LoadAsync();
-                player.PlayLooping();
+                if (onAir == true)
+                {
+                    onAir = false;
+                    mediaPlayer.Stop();
+                }
+                mediaPlayer = new MP.MediaPlayer();
+                mediaPlayer.Open(fenetre.FileName);
+                onAir = true;
+                //mediaPlayer.Play();
+                //player = new SoundPlayer();
+                //player.SoundLocation = fenetre.FileName;
+                //player.LoadAsync();
+                //player.PlayLooping();
             }
         }
 

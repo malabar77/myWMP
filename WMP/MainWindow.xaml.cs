@@ -23,6 +23,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using MP = MediaPlayer;
+using System.Timers;
 
 namespace WMP
 {
@@ -31,14 +32,13 @@ namespace WMP
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Audio music;
-        private SoundPlayer player;
         private bool onAir = false;
         private int bitrate;
         private int duration;
         private MP.MediaPlayer mediaPlayer;
         private string mp3 = "Birdy.mp3";
-        private string wav = "..\\..\\LARCY.wav";
+        private string wav = "LARCY.wav";
+        private System.Timers.Timer timer;
 
         public MainWindow()
         {
@@ -56,10 +56,16 @@ namespace WMP
             onAir = true;
             SetDuration(GetDuration(mp3));
 
-            //Thread.Sleep(5000);
+
+            ////Thread.Sleep(5000);
             //player.Stop();
             //music = new Audio("..\\..\\Birdy.mp3");
             //music.Play();
+        }
+
+        private void timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            Timer.Text = mediaPlayer.Duration.ToString();
         }
 
         private int GetDuration(string path)
@@ -92,22 +98,24 @@ namespace WMP
 
         private void Pause_Click(object sender, RoutedEventArgs e)
         {
+            onAir = false;
             mediaPlayer.Pause();
         }
 
         private void Stop_Click(object sender, RoutedEventArgs e)
         {
+            onAir = false;
             mediaPlayer.Stop();
         }
 
         private void Parcourir_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog fenetre = new OpenFileDialog();
-            fenetre.Filter = "Fichiers Audio|*.wav;*.mp3";
+            //fenetre.Filter = "Fichiers Audio|*.wav;*.mp3";
             fenetre.Multiselect = false;
             if (fenetre.ShowDialog() == true)
             {
-                Playlistview.Text = fenetre.FileName;
+                Playlistview.Text = fenetre.SafeFileName;
                 this.Title = fenetre.SafeFileName;
                 if (onAir == true)
                 {
@@ -117,6 +125,10 @@ namespace WMP
                 mediaPlayer = new MP.MediaPlayer();
                 mediaPlayer.Open(fenetre.FileName);
                 onAir = true;
+                this.timer = new System.Timers.Timer();
+                this.timer.Interval = TimeSpan.FromSeconds(1).TotalMilliseconds;
+                this.timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
+                this.timer.Start();
                 //mediaPlayer.Play();
                 //player = new SoundPlayer();
                 //player.SoundLocation = fenetre.FileName;
@@ -129,5 +141,12 @@ namespace WMP
         {
 
 	    }
+
+        private void Play_Click(object sender, RoutedEventArgs e)
+        {
+            onAir = true;
+            mediaPlayer.Play();
+        }
+
     }
 }

@@ -35,21 +35,22 @@ namespace WMP
         private bool onAir = false;
         private int bitrate;
         private int duration;
-        private MP.MediaPlayer mediaPlayer;
+        //private MP.MediaPlayer mediaPlayer;
         private string mp3 = "Birdy.mp3";
         private string wav = "LARCY.wav";
         private System.Timers.Timer timer;
+        private double dur;
 
         public MainWindow()
         {
             InitializeComponent();
-	    }
+        }
 
         private void Lecture_Click(object sender, RoutedEventArgs e)
         {
-            mediaPlayer = new MP.MediaPlayer();
-            mediaPlayer.Open(mp3);
-            //player = new SoundPlayer();
+            //mediaPlayer = new MP.MediaPlayer();
+            //mediaPlayer.Open(mp3);
+            ////player = new SoundPlayer();
             //player.SoundLocation = "..\\..\\LARCY.wav";
             //player.Load();
             //player.PlayLooping();
@@ -65,7 +66,7 @@ namespace WMP
 
         private void timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            Timer.Text = mediaPlayer.Duration.ToString();
+            Timer.Text = dur.ToString();
         }
 
         private int GetDuration(string path)
@@ -98,20 +99,21 @@ namespace WMP
 
         private void Pause_Click(object sender, RoutedEventArgs e)
         {
+            //Timer.Text = mediaPlayer.CurrentPosition.ToString() ;
             onAir = false;
-            mediaPlayer.Pause();
+            //mediaPlayer.Pause();
         }
 
         private void Stop_Click(object sender, RoutedEventArgs e)
         {
             onAir = false;
-            mediaPlayer.Stop();
+            //mediaPlayer.Stop();
         }
 
         private void Parcourir_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog fenetre = new OpenFileDialog();
-            //fenetre.Filter = "Fichiers Audio|*.wav;*.mp3";
+            fenetre.Filter = "Fichiers Multimedia|*.wav;*.mp3;*.mp4";
             fenetre.Multiselect = false;
             if (fenetre.ShowDialog() == true)
             {
@@ -120,15 +122,18 @@ namespace WMP
                 if (onAir == true)
                 {
                     onAir = false;
-                    mediaPlayer.Stop();
+                    //mediaPlayer.Stop();
                 }
-                mediaPlayer = new MP.MediaPlayer();
-                mediaPlayer.Open(fenetre.FileName);
-                onAir = true;
-                this.timer = new System.Timers.Timer();
-                this.timer.Interval = TimeSpan.FromSeconds(1).TotalMilliseconds;
-                this.timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
-                this.timer.Start();
+                media.Source = new Uri(fenetre.FileName);
+                SetDuration(GetDuration(fenetre.FileName));
+
+                //mediaPlayer = new MP.MediaPlayer();
+                //mediaPlayer.Open(fenetre.FileName);
+                //onAir = true;
+                //this.timer = new System.Timers.Timer();
+                //this.timer.Interval = TimeSpan.FromSeconds(1).TotalMilliseconds;
+                //this.timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
+                //this.timer.Start();
                 //mediaPlayer.Play();
                 //player = new SoundPlayer();
                 //player.SoundLocation = fenetre.FileName;
@@ -139,13 +144,12 @@ namespace WMP
 
         private void slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-
+            media.Volume = (double)Volslider.Value;
 	    }
 
         private void Play_Click(object sender, RoutedEventArgs e)
         {
-            onAir = true;
-            mediaPlayer.Play();
+            media.LoadedBehavior = MediaState.Play;
         }
 
     }

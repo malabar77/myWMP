@@ -20,13 +20,13 @@
                 <MenuItem Header="Parcourir" Name="Parcourir" Click="Parcourir_Click" />
             </MenuItem>
         </Menu>
-        <Slider x:Name="trackwave" Margin="0,0,0,-3" Grid.Row="2" ValueChanged="slider_ValueChanged" HorizontalAlignment="Right" Width="90" Height="34" VerticalAlignment="Bottom"/>
+        <Slider x:Name="Volslider" Margin="0,0,0,-3" Grid.Row="2" ValueChanged="slider_ValueChanged" HorizontalAlignment="Right" Width="90" Height="34" VerticalAlignment="Bottom" Minimum="0" Maximum="1"/>
         <TextBlock x:Name="Timer" HorizontalAlignment="Left" Margin="91.038,0,0,18" Grid.Row="2" TextWrapping="Wrap" Text="--:--" Width="35.962" Height="13" VerticalAlignment="Bottom"/>
-        <Image x:Name="image" Grid.Row="1" Margin="100,0,0,0"/>
         <ProgressBar Margin="132,0,95,13" Grid.Row="2" Height="18" VerticalAlignment="Bottom"/>
         <TextBlock x:Name="Playlistview" HorizontalAlignment="Left" Grid.Row="1" TextWrapping="Wrap" Text="" Width="100" Margin="0,5,0,0" d:LayoutOverrides="HorizontalAlignment"/>
         <Button x:Name="Play" Content="►" HorizontalAlignment="Left" Margin="4.815,5,0,10" Grid.Row="2" Width="29" FontFamily="Arial Black" FontSize="24" Click="Play_Click"/>
         <Button x:Name="Pausebutton" Content="II" HorizontalAlignment="Left" Margin="38.815,5,0,10" Grid.Row="2" Width="29" FontWeight="Bold" FontSize="24" FontFamily="Arial Black" Click="Pause_Click"/>
+        <MediaElement x:Name="media" Margin="100,0,0,0" Grid.Row="1"/>
 
     </Grid>
 </Window>

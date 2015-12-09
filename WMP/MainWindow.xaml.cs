@@ -36,14 +36,23 @@ namespace WMP
         private int bitrate;
         private int duration;
         //private MP.MediaPlayer mediaPlayer;
-        private string mp3 = "Birdy.mp3";
-        private string wav = "LARCY.wav";
-        private System.Timers.Timer timer;
+  //      private System.Timers.Timer timer;
         private double dur;
 
         public MainWindow()
         {
             InitializeComponent();
+            media.MediaOpened += new RoutedEventHandler(media_MediaOpened);
+        }
+
+        private void media_MediaOpened(object sender, RoutedEventArgs e)
+        {
+            SetDuration(media.NaturalDuration.TimeSpan.TotalSeconds);
+        }
+
+        private void Plalistview_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            media.Source = new Uri(Playlistview.SelectedValuePath);
         }
 
         private void Lecture_Click(object sender, RoutedEventArgs e)
@@ -55,7 +64,7 @@ namespace WMP
             //player.Load();
             //player.PlayLooping();
             onAir = true;
-            SetDuration(GetDuration(mp3));
+//            SetDuration(GetDuration());
 
 
             ////Thread.Sleep(5000);
@@ -71,13 +80,13 @@ namespace WMP
 
         private int GetDuration(string path)
         {
-            byte[] TotalBytes = File.ReadAllBytes("..\\..\\LARCY.wav");
+            byte[] TotalBytes = File.ReadAllBytes("..\\..\\Birdy.mp3");
             bitrate = (BitConverter.ToInt32(new[] { TotalBytes[28], TotalBytes[29], TotalBytes[30], TotalBytes[31] }, 0) * 8);
             duration = (TotalBytes.Length - 8) * 8 / bitrate;
             return duration;
         }
 
-        private void SetDuration(int duration)
+        private void SetDuration(double duration)
         {
             int n = 1;
             int minutes = 0;
@@ -87,7 +96,7 @@ namespace WMP
             while (n * 60 < duration)
                 n = n + 1;
             minutes = n - 1;
-            seconds = duration % 60;
+            seconds = (int)duration % 60;
             min = minutes.ToString();
             sec = seconds.ToString();
             if (minutes < 10)
@@ -117,7 +126,7 @@ namespace WMP
             fenetre.Multiselect = false;
             if (fenetre.ShowDialog() == true)
             {
-                Playlistview.Text = fenetre.SafeFileName;
+                Playlistview.Items.Add(fenetre.SafeFileName);
                 this.Title = fenetre.SafeFileName;
                 if (onAir == true)
                 {
@@ -125,7 +134,9 @@ namespace WMP
                     //mediaPlayer.Stop();
                 }
                 media.Source = new Uri(fenetre.FileName);
-                SetDuration(GetDuration(fenetre.FileName));
+                media.LoadedBehavior = MediaState.Manual;
+                media.Play();
+                //SetDuration(GetDuration(fenetre.FileName));
 
                 //mediaPlayer = new MP.MediaPlayer();
                 //mediaPlayer.Open(fenetre.FileName);

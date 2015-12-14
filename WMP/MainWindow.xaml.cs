@@ -22,8 +22,8 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using MP = MediaPlayer;
 using System.Timers;
+using System.Windows.Controls.Primitives;
 
 namespace WMP
 {
@@ -33,8 +33,6 @@ namespace WMP
     public partial class MainWindow : Window
     {
         private bool onAir = false;
-        private int bitrate;
-        private int duration;
 
         public MainWindow()
         {
@@ -44,12 +42,17 @@ namespace WMP
 
         private void media_MediaOpened(object sender, RoutedEventArgs e)
         {
-            SetDuration(media.NaturalDuration.TimeSpan.TotalSeconds);
+//            SetDuration(media.NaturalDuration.TimeSpan.TotalSeconds);
+            SetDuration(media.Position.TotalSeconds);
+            sliProgress.Minimum = 0;
+            sliProgress.Maximum = media.NaturalDuration.TimeSpan.TotalSeconds;
+            sliProgress.Value = media.Position.TotalSeconds;
+
         }
 
         private void Plalistview_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string path = (string)Playlistview.SelectedValue;
+            string path = (string)Playlistviewfull.SelectedItem;
             media.Source = new Uri(path);
             media.Play();
         }
@@ -61,15 +64,7 @@ namespace WMP
 
         private void timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            Timer.Text = dur.ToString();
-        }
 
-        private int GetDuration(string path)
-        {
-            byte[] TotalBytes = File.ReadAllBytes("..\\..\\Birdy.mp3");
-            bitrate = (BitConverter.ToInt32(new[] { TotalBytes[28], TotalBytes[29], TotalBytes[30], TotalBytes[31] }, 0) * 8);
-            duration = (TotalBytes.Length - 8) * 8 / bitrate;
-            return duration;
         }
 
         private void SetDuration(double duration)
@@ -109,10 +104,11 @@ namespace WMP
         private void DialogFenetre()
         {
             OpenFileDialog fenetre = new OpenFileDialog();
-            fenetre.Filter = "Fichiers Multimedia|*.wav;*.mp3;*.mp4";
+            //fenetre.Filter = "Fichiers Multimedia|*.wav;*.mp3;*.mp4";
             if (fenetre.ShowDialog() == true)
             {
                 Playlistview.Items.Add(fenetre.FileName);
+                Playlistviewfull.Items.Add(fenetre.SafeFileName);
                 this.Title = fenetre.SafeFileName;
                 if (onAir == true)
                 {
@@ -136,8 +132,25 @@ namespace WMP
 
         private void Play_Click(object sender, RoutedEventArgs e)
         {
-            if media
             media.LoadedBehavior = MediaState.Play;
+        }
+        private bool userIsDraggingSlider = false;
+
+
+        private void sliProgress_DragStarted(object sender, DragStartedEventArgs e)
+        {
+            userIsDraggingSlider = true;
+        }
+
+        private void sliProgress_DragCompleted(object sender, DragCompletedEventArgs e)
+        {
+            userIsDraggingSlider = false;
+            media.Position = TimeSpan.FromSeconds(sliProgress.Value);
+        }
+
+        private void sliProgress_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            Timer.Text = TimeSpan.FromSeconds(sliProgress.Value).ToString(@"hh\:mm\:ss");
         }
 
     }

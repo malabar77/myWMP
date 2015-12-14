@@ -26,7 +26,7 @@
         <Button x:Name="Play" Content="►" HorizontalAlignment="Left" Margin="5,7,0,8" Grid.Row="2" Width="29" FontFamily="Arial Black" FontSize="24" Click="Play_Click"/>
         <Button x:Name="Pausebutton" Content="II" HorizontalAlignment="Left" Margin="39,7,0,8" Grid.Row="2" Width="29" FontWeight="Bold" FontSize="24" FontFamily="Arial Black" Click="Pause_Click"/>
         <MediaElement x:Name="media" Margin="100,0,0,0" Grid.Row="1"/>
-        <ListView x:Name="Playlistview" Grid.Row="1" HorizontalAlignment="Left" Width="100">
+        <ListView x:Name="Playlistview" Grid.Row="1" HorizontalAlignment="Left" Width="100" SelectionChanged="Plalistview_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>

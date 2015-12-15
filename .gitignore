@@ -1,0 +1,4 @@
+*.cache
+WMP\obj\*
+WMP\bin\*
+WMP\.vs\*

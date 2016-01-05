@@ -22,14 +22,16 @@
             </MenuItem>
         </Menu>
         <Slider x:Name="Volslider" Margin="0,0,0,-2" Grid.Row="2" ValueChanged="slider_ValueChanged" HorizontalAlignment="Right" Width="90" Height="34" VerticalAlignment="Bottom" Minimum="0" Maximum="1"/>
-        <TextBlock x:Name="Timer" HorizontalAlignment="Left" Margin="91.038,0,0,18" Grid.Row="2" TextWrapping="Wrap" Text=":" Width="35.962" Height="13" VerticalAlignment="Bottom"/>
-        <Slider Name="sliProgress" Thumb.DragStarted="sliProgress_DragStarted"  Thumb.DragCompleted="sliProgress_DragCompleted" ValueChanged="sliProgress_ValueChanged" Margin="127,13,106,10" Grid.Row="2"  />
+        <Slider Name="sliProgress" Thumb.DragStarted="sliProgress_DragStarted"  Thumb.DragCompleted="sliProgress_DragCompleted" ValueChanged="sliProgress_ValueChanged" Margin="157,13,106,10" Grid.Row="2"  />
         <ProgressBar Name="slixProgress" Margin="132,0,95,13" Grid.Row="2" Height="18" VerticalAlignment="Bottom" Maximum="{Binding Path=NaturalDuration.TimeSpan.TotalSeconds, Mode=OneWay, ElementName=media}" Value="{Binding Path=Position.TotalSeconds, Mode=OneWay, ElementName=media}" Visibility="Hidden"/>
         <Button x:Name="Play" Content="►" HorizontalAlignment="Left" Margin="5,7,0,8" Grid.Row="2" Width="29" FontFamily="Arial Black" FontSize="24" Click="Play_Click"/>
         <Button x:Name="Pausebutton" Content="II" HorizontalAlignment="Left" Margin="39,7,0,8" Grid.Row="2" Width="29" FontWeight="Bold" FontSize="24" FontFamily="Arial Black" Click="Pause_Click"/>
         <MediaElement x:Name="media" Margin="100,0,0,0" Grid.Row="1"/>
         <ListView x:Name="Playlistview" Grid.Row="1" HorizontalAlignment="Left" Width="100" SelectionChanged="Plalistview_SelectionChanged"/>
         <ListView x:Name="Playlistviewfull" Grid.Row="1" HorizontalAlignment="Left" Width="100" SelectionChanged="Plalistview_SelectionChanged" Visibility="Hidden"/>
+        <TextBlock x:Name="Timer" HorizontalAlignment="Left" Margin="73,0,0,18" Grid.Row="2" TextWrapping="Wrap" Width="35.962" Height="13" VerticalAlignment="Bottom" RenderTransformOrigin="-0.196,1.538"/>
+        <TextBlock HorizontalAlignment="Left" Margin="113.962,0,0,17.95" Grid.Row="2" TextWrapping="Wrap" Text=":" Width="2.962" Height="13" VerticalAlignment="Bottom" RenderTransformOrigin="-0.196,1.538"/>
+        <TextBlock x:Name="Timermax" HorizontalAlignment="Left" Margin="121.924,0,0,17.9" Grid.Row="2" TextWrapping="Wrap" Width="35.962" Height="13" VerticalAlignment="Bottom" RenderTransformOrigin="-0.196,1.538"/>
 
     </Grid>
 </Window>

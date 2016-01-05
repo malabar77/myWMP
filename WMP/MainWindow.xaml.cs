@@ -12,6 +12,7 @@ namespace WMP
     {
         private bool onAir = false;
         private bool userIsDraggingSlider = false;
+        private string timemaxmedia = "00:00";
 
 
         public MainWindow()
@@ -34,6 +35,8 @@ namespace WMP
         {
             sliProgress.Minimum = 0;
             sliProgress.Maximum = media.NaturalDuration.TimeSpan.TotalSeconds;
+            Timermax.Text = SetDuration(media.NaturalDuration.TimeSpan.TotalSeconds);
+
 
         }
 

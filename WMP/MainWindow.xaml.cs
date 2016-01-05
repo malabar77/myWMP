@@ -111,8 +111,10 @@ namespace WMP
 
         private void slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            media.Volume = (double)Volslider.Value;
-	    }
+            try {
+                media.Volume = (double)Volslider.Value;
+            } catch (NullReferenceException) {}
+            }
 
         private void Play_Click(object sender, RoutedEventArgs e)
         {

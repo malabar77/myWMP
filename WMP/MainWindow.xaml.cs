@@ -88,7 +88,7 @@ namespace WMP
         private void DialogFenetre()
         {
             OpenFileDialog fenetre = new OpenFileDialog();
-            fenetre.Filter = "Fichiers Multimedia|*.wav;*.mp3;*.mp4";
+            fenetre.Filter = "Fichiers Multimedia|*.wav;*.mp3;*.mp4;*.wmv";
             if (fenetre.ShowDialog() == true)
             {
                 Playlistviewfull.Items.Add(fenetre.FileName);

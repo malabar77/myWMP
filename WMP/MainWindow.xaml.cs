@@ -94,7 +94,7 @@ namespace WMP
                 Playlistviewfull.Items.Add(fenetre.FileName);
                 Playlistview.Items.Add(fenetre.SafeFileName);
                 this.Title = fenetre.SafeFileName;
-                onAir = onAir == false ? true : false;
+                onAir = true;
                 media.Source = new Uri(fenetre.FileName);
                 media.LoadedBehavior = MediaState.Manual;
                 try {

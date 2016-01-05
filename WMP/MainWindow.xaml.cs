@@ -27,9 +27,12 @@ namespace WMP
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            Timer.Text = SetDuration(media.Position.TotalSeconds);
-            sliProgress.Value = media.Position.TotalSeconds;
-        }
+            if (onAir)
+            {
+                Timer.Text = SetDuration(media.Position.TotalSeconds);
+                sliProgress.Value = media.Position.TotalSeconds;
+            }
+         }
 
         private void media_MediaOpened(object sender, RoutedEventArgs e)
         {
@@ -54,14 +57,11 @@ namespace WMP
     
         private string SetDuration(double duration)
         {
-            int n = 1;
             int minutes = 0;
             int seconds = 0;
             string min;
             string sec;
-            while (n * 60 < duration)
-                n = n + 1;
-            minutes = n - 1;
+            minutes = (int)(duration / 60);
             seconds = (int)duration % 60;
             min = minutes.ToString();
             sec = seconds.ToString();
@@ -94,10 +94,7 @@ namespace WMP
                 Playlistviewfull.Items.Add(fenetre.FileName);
                 Playlistview.Items.Add(fenetre.SafeFileName);
                 this.Title = fenetre.SafeFileName;
-                if (onAir == true)
-                {
-                    onAir = false;
-                }
+                onAir = onAir == false ? true : false;
                 media.Source = new Uri(fenetre.FileName);
                 media.LoadedBehavior = MediaState.Manual;
                 try {
@@ -120,6 +117,7 @@ namespace WMP
 
         private void Play_Click(object sender, RoutedEventArgs e)
         {
+            onAir = true;
             media.LoadedBehavior = MediaState.Play;
         }
 

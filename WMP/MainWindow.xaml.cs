@@ -88,7 +88,7 @@ namespace WMP
         private void DialogFenetre()
         {
             OpenFileDialog fenetre = new OpenFileDialog();
-            fenetre.Filter = "Fichiers Multimedia|*.wav;*.mp3;*.mp4;*.wmv";
+            fenetre.Filter = "Fichiers Multimedia|*.wav;*.mp3;*.mp4;*.wmv;*.wma;";
             if (fenetre.ShowDialog() == true)
             {
                 Playlistviewfull.Items.Add(fenetre.FileName);
@@ -100,8 +100,10 @@ namespace WMP
                 }
                 media.Source = new Uri(fenetre.FileName);
                 media.LoadedBehavior = MediaState.Manual;
-                media.Play();
-            }
+                try {
+                    media.Play();
+                } catch (Exception) {}
+             }
         }
 
         private void Parcourir_Click(object sender, RoutedEventArgs e)

@@ -11,8 +11,9 @@ namespace WMP
     public partial class MainWindow : Window
     {
         private bool onAir = false;
-        private bool userIsDraggingSlider = false;
         private string timemaxmedia = "00:00";
+        private int currentIndex;
+        private int ListSize = 0;
 
 
         public MainWindow()
@@ -31,9 +32,20 @@ namespace WMP
             {
                 Timer.Text = SetDuration(media.Position.TotalSeconds);
                 sliProgress.Value = media.Position.TotalSeconds;
+                if (Timer.Text == Timermax.Text && currentIndex + 1 != ListSize)
+                {
+                    currentIndex += 1;
+                    string path = (string)Playlistviewfull.Items[currentIndex];
+                    media.Source = new Uri(path);
+                    onAir = true;
+                    media.Play();
+                }
+                else if(Timer.Text == Timermax.Text && currentIndex + 1 == ListSize)
+                {
+                    media.Stop();
+                }
             }
-         }
-
+        }
         private void media_MediaOpened(object sender, RoutedEventArgs e)
         {
             sliProgress.Minimum = 0;
@@ -47,6 +59,7 @@ namespace WMP
         {
             string path = (string)Playlistviewfull.Items[Playlistview.SelectedIndex];
             media.Source = new Uri(path);
+            onAir = true;
             media.Play();
         }
 
@@ -91,13 +104,17 @@ namespace WMP
             fenetre.Filter = "Fichiers Multimedia|*.wav;*.mp3;*.mp4;*.wmv;*.wma;";
             if (fenetre.ShowDialog() == true)
             {
-                Playlistviewfull.Items.Add(fenetre.FileName);
-                Playlistview.Items.Add(fenetre.SafeFileName);
+                Playlistviewfull.Items.Insert(0, fenetre.FileName);
+                Playlistview.Items.Insert(0, fenetre.SafeFileName);
                 this.Title = fenetre.SafeFileName;
+                currentIndex = 0;
+                ListSize += 1;
                 onAir = true;
                 media.Source = new Uri(fenetre.FileName);
                 media.LoadedBehavior = MediaState.Manual;
-                try {
+                media.UnloadedBehavior = MediaState.Manual;
+                try
+                {
                     media.Play();
                 } catch (Exception) {}
              }
@@ -123,19 +140,20 @@ namespace WMP
 
         private void sliProgress_DragStarted(object sender, DragStartedEventArgs e)
         {
-            userIsDraggingSlider = true;
+
+            media.Position = TimeSpan.FromSeconds(sliProgress.Value);
         }
 
         private void sliProgress_DragCompleted(object sender, DragCompletedEventArgs e)
         {
-            userIsDraggingSlider = false;
             media.Position = TimeSpan.FromSeconds(sliProgress.Value);
         }
 
         private void sliProgress_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            //Timer.Text = media.Position.TotalSeconds.ToString();
+
+
         }
 
     }
-}
+} 

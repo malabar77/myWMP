@@ -14,6 +14,7 @@ namespace WMP
         private string timemaxmedia = "00:00";
         private int currentIndex;
         private int ListSize = 0;
+        private double prevVol = 0.5;
 
 
         public MainWindow()
@@ -45,6 +46,7 @@ namespace WMP
                     media.Stop();
                 }
             }
+
         }
         private void media_MediaOpened(object sender, RoutedEventArgs e)
         {
@@ -130,7 +132,17 @@ namespace WMP
             try {
                 media.Volume = (double)Volslider.Value;
             } catch (NullReferenceException) {}
+            if (onAir == true && Volslider.Value == 0)
+            {
+                MuteButton.Visibility = Visibility.Visible;
+                NonMuteButton.Visibility = Visibility.Hidden;
             }
+            else if (onAir == true)
+            {
+                MuteButton.Visibility = Visibility.Hidden;
+                NonMuteButton.Visibility = Visibility.Visible;
+            }
+        }
 
         private void Play_Click(object sender, RoutedEventArgs e)
         {
@@ -155,5 +167,21 @@ namespace WMP
 
         }
 
+        private void Mute_UnMute(object sender, RoutedEventArgs e)
+        {
+            if (MuteButton.Visibility == Visibility.Hidden)
+            {
+                MuteButton.Visibility = Visibility.Visible;
+                NonMuteButton.Visibility = Visibility.Hidden;
+                prevVol = Volslider.Value;
+                Volslider.Value = 0.0;
+            }
+            else
+            {
+                MuteButton.Visibility = Visibility.Hidden;
+                NonMuteButton.Visibility = Visibility.Visible;
+                Volslider.Value = prevVol;
+            }
+        }
     }
 } 

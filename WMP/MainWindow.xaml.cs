@@ -11,7 +11,6 @@ namespace WMP
     public partial class MainWindow : Window
     {
         private bool onAir = false;
-        private string timemaxmedia = "00:00";
         private int currentIndex;
         private int ListSize = 0;
         private double prevVol = 0.5;
@@ -50,9 +49,13 @@ namespace WMP
         }
         private void media_MediaOpened(object sender, RoutedEventArgs e)
         {
-            sliProgress.Minimum = 0;
-            sliProgress.Maximum = media.NaturalDuration.TimeSpan.TotalSeconds;
-            Timermax.Text = SetDuration(media.NaturalDuration.TimeSpan.TotalSeconds);
+            try
+            {
+                sliProgress.Minimum = 0;
+                sliProgress.Maximum = media.NaturalDuration.TimeSpan.TotalSeconds;
+                Timermax.Text = SetDuration(media.NaturalDuration.TimeSpan.TotalSeconds);
+            }
+            catch (Exception) { }
 
 
         }
@@ -103,7 +106,7 @@ namespace WMP
         private void DialogFenetre()
         {
             OpenFileDialog fenetre = new OpenFileDialog();
-            fenetre.Filter = "Fichiers Multimedia|*.wav;*.mp3;*.mp4;*.wmv;*.wma;";
+            fenetre.Filter = "Fichiers Multimedia|*.wav;*.mp3;*.mp4;*.wmv;*.wma;*.png;*.bmp;*.tiff;*.jpeg;*.gif;*.jpg;*.ico| Images|*.png;*.bmp;*.tiff;*.jpeg;*.gif;*.jpg;*.ico | Videos |*.mp4;*.wmv;*.wma| Musiques | *.wav;*.mp3";
             if (fenetre.ShowDialog() == true)
             {
                 Playlistviewfull.Items.Insert(0, fenetre.FileName);
